@@ -1,0 +1,73 @@
+{
+  "name": "vite-vue3-study",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build:dev": "vite bulid --mode development",
+    "build:pro": "vite bulid --mode production",
+    "serve": "vite preview",
+    "start": "npm run dev",
+    "prepare": "husky install",
+    "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+    "prettier": "prettier --write ."
+  },
+  "dependencies": {
+    "@vicons/ionicons5": "^0.11.0",
+    "axios": "^0.21.4",
+    "naive-ui": "^2.21.5",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.0-rc.10",
+    "vfonts": "^0.1.0",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "@types/nprogress": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "@vitejs/plugin-vue": "^1.9.0",
+    "babel-eslint": "8.2.1",
+    "dart-sass": "^1.25.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^7.15.1",
+    "husky": "^7.0.0",
+    "lint-staged": ">=10",
+    "mrm": "^3.0.10",
+    "prettier": "^2.4.1",
+    "sass": "^1.44.0",
+    "standard": "^16.0.3",
+    "stylelint": "^13.13.1",
+    "stylelint-config-recommended-scss": "^4.3.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-rscss": "^0.4.0",
+    "stylelint-scss": "^3.20.1",
+    "typescript": "^4.4.3",
+    "vite": "^2.7.0",
+    "vite-plugin-compression": "^0.3.6",
+    "vue-eslint-parser": "^7.10.0",
+    "vue-tsc": "^0.3.0"
+  },
+  "description": "This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "yarn lint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "private": true
+}
