@@ -2,22 +2,30 @@
  * @Descripttion:
  * @version:
  * @Date: 2021-09-23 15:00:00
- * @LastEditors: MonkeyL
- * @LastEditTime: 2021-12-06 15:44:59
+ * @LastEditors: Jelly
+ * @LastEditTime: 2022-09-15 11:44:23
  */
 // http.ts
 import axios, { AxiosRequestConfig } from 'axios'
 import NProgress from 'nprogress'
+import cookie from '@/utils/cookie'
 
 // 设置请求头和请求路径
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = 'http://jego-crm-gateway.base.svc.cluster.local:9412'
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.interceptors.request.use(
   (config): AxiosRequestConfig => {
-    const token = window.sessionStorage.getItem('token')
+    const token = cookie.getCookies('token')
     if (token) {
       config.headers.token = token
+    }
+    let query = 'token=' + token
+
+    if (config.url!.indexOf('?') == -1) {
+      config.url += '?' + query
+    } else {
+      config.url += '&' + query
     }
     return config
   },
@@ -27,16 +35,17 @@ axios.interceptors.request.use(
 )
 // 响应拦截
 axios.interceptors.response.use((res) => {
-  if (res.data.code === 111) {
-    sessionStorage.setItem('token', '')
+  if (res.data.code === '429') {
+    cookie.setCookies('token', '', 0)
     // token过期操作
   }
   return res
 })
 
 interface ResType<T> {
-  code: number
-  data?: T
+  status?: number
+  code?: number
+  data: T
   msg: string
   err?: string
 }

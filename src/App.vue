@@ -1,19 +1,28 @@
 <script setup lang="ts">
-import { NConfigProvider, darkTheme } from 'naive-ui'
 </script>
 
 <template>
-  <n-config-provider :theme="darkTheme">
-    <div id="app">
-      <router-view />
-    </div>
-  </n-config-provider>
+  <router-view />
 </template>
 
-<style>
+<style lang="scss">
 body,
 html {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
+}
+
+#app {
+  height: 100%;
+
+  &>.n-config-provider {
+    height: 100%;
+
+    &>.n-layout {
+      height: 100%;
+    }
+  }
 }
 </style>

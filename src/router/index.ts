@@ -1,27 +1,49 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import group from './modules/group'
+import plan from './modules/plan'
+import Layout from '@/views/layout/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Login',
-    component: () => import('@/views/login/Login.vue'),
+export const LoginRoute: RouteRecordRaw = {
+  path: '/login',
+  name: 'Login',
+  component: () => import('@/views/Home.vue'),
+  meta: {
+    title: '登录',
   },
-  {
-    path: '/home',
-    name: 'Home',
-    component: () => import('@/views/Home.vue'),
+}
+export const ErrorRoute:RouteRecordRaw = {
+  path:'/',
+  name:'首页',
+  component:Layout,
+  meta: {
+    title: '首页',
   },
-  {
-    path: '/study',
-    name: 'Study',
-    component: () => import('@/views/Study.vue'),
-  },
-  { path: '/', redirect: { name: 'Home' } },
-]
+}
 
+export const ForbidenRoute:RouteRecordRaw = {
+  path:'/404',
+  name:'404',
+  component:()=>import('@/views/layout/parentLayout.vue'),
+  meta:{
+    title:'404'
+  }
+}
+
+// 需要验证权限路由
+export const asyncRoute:any[] = [group,plan,ErrorRoute]
+// 普通路由 无需验证权限
+export const constantRouter: any[] = [LoginRoute,ForbidenRoute]
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: [...constantRouter,...asyncRoute]
+})
+
+router.beforeEach((to, from, next) => {
+  if (router.hasRoute(to.name || '')) {
+    next()
+  } else {
+    router.push('/')
+  }
 })
 
 export default router

@@ -12,11 +12,15 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "@vicons/ionicons5": "^0.11.0",
+    "@element-plus/icons-vue": "^2.0.9",
     "axios": "^0.21.4",
-    "naive-ui": "^2.21.5",
+    "element-plus": "^2.2.16",
+    "js-cookie": "^3.0.1",
     "nprogress": "^0.2.0",
-    "pinia": "^2.0.0-rc.10",
+    "path-to-regexp": "^6.2.1",
+    "pinia": "^2.0.18",
+    "qs": "^6.11.0",
+    "screenfull": "^6.0.2",
     "vfonts": "^0.1.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.11"
