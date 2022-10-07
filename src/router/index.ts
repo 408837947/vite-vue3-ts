@@ -20,6 +20,15 @@ export const ErrorRoute:RouteRecordRaw = {
   },
 }
 
+const graphRoute:RouteRecordRaw = {
+  path:'/graph',
+  name:'画布',
+  component:()=>import('@/views/marketGraph/index.vue'),
+  meta:{
+    title:'画布'
+  }
+}
+
 export const ForbidenRoute:RouteRecordRaw = {
   path:'/404',
   name:'404',
@@ -30,7 +39,7 @@ export const ForbidenRoute:RouteRecordRaw = {
 }
 
 // 需要验证权限路由
-export const asyncRoute:any[] = [group,plan,ErrorRoute]
+export const asyncRoute:any[] = [group,plan,ErrorRoute,graphRoute]
 // 普通路由 无需验证权限
 export const constantRouter: any[] = [LoginRoute,ForbidenRoute]
 const router = createRouter({

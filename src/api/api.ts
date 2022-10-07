@@ -10,6 +10,7 @@ import { MenuList } from "./type";
  */
  const apiList = {
   'getMenu': '/api/main/home',
+  'logOut':'/login/logout'
 }
 /**
  * @description: 所有的接口列表类型
@@ -24,8 +25,8 @@ export type apiKeyType = keyof typeof apiList;
  */
 export interface apiKeyDataType {
   'getMenu': {
-    code?: number;
-    status?: number;
+    code?: number|string;
+    status?: number|string;
     data: {
       userName: string;
       role:string;
@@ -33,6 +34,12 @@ export interface apiKeyDataType {
     },
     msg:string
   },
+  'logOut':{
+    code?:number|string
+    status?:number|string
+    data:Object
+    msg:string
+  }
 }
 
 export default apiList;

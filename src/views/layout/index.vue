@@ -135,12 +135,13 @@ const handleCollapse = (value:boolean) => {
 
 .el-main {
   padding: 10px;
+  box-sizing: border-box;
   background-color: #f0f0f0;
   border: 1px solid #ebeef5;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
   .main{
-    padding-bottom: 20px;
+    padding-bottom: 1px;
     background-color: #fff;
   }
 }

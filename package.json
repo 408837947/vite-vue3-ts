@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "build:dev": "vite bulid --mode development",
     "build:pro": "vite bulid --mode production",
     "serve": "vite preview",
@@ -12,7 +13,9 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
+    "@antv/g6": "^4.7.4",
     "@element-plus/icons-vue": "^2.0.9",
+    "@rollup/plugin-commonjs": "^22.0.2",
     "axios": "^0.21.4",
     "element-plus": "^2.2.16",
     "js-cookie": "^3.0.1",
@@ -23,6 +26,7 @@
     "screenfull": "^6.0.2",
     "vfonts": "^0.1.0",
     "vue": "^3.2.13",
+    "vue-i18n": "9.3.0-beta.3",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {

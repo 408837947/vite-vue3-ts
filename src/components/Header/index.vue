@@ -1,7 +1,7 @@
 <!--
  * @Author: Jelly
  * @Date: 2022-09-16 10:38:55
- * @LastEditTime: 2022-09-16 17:11:40
+ * @LastEditTime: 2022-09-28 10:43:46
  * @LastEditors: Jelly
  * @Description:顶部退出登录
 -->
@@ -23,17 +23,17 @@
         </el-icon>
       </el-tooltip>
       <SelectLang />
-      <el-dropdown trigger="click" class="logOut" @command="handleLogOut">
+      <el-dropdown trigger="click" class="logOut">
         <span class="el-dropdown-link">
-          <img :src="'/src/assets/img/avatar.jpg'">
-          {{store.name}}
+          <img :src="getImageUrl('Img/avatar.jpg')" alt="#" />
+          {{ store.name }}
           <el-icon class="el-icon--right">
             <arrow-down />
           </el-icon>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item @click="handleLogOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -45,14 +45,15 @@
 import { ref, reactive } from 'vue'
 import screenfull from 'screenfull'
 import SelectLang from '@/components/SelectLang/index.vue'
-import useMainStore from '@/store/useMainStore';
+import useMainStore from '@/store/useMainStore'
+import { userLogin, getImageUrl } from '@/utils/index'
 const store = useMainStore()
-const myEmit = defineEmits(["handleCollapse"])
+const myEmit = defineEmits(['handleCollapse'])
 const myProps = defineProps({
   isCollapse: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 })
 // 菜单收缩
 const handleClick = () => {
@@ -64,7 +65,8 @@ const onToggle = () => {
 }
 // 退出登录
 const handleLogOut = () => {
-
+  store.logOut()
+  userLogin()
 }
 </script>
 <style lang="scss" scoped>
@@ -94,7 +96,7 @@ const handleLogOut = () => {
   }
 
   .right {
-    .fullScreen{
+    .fullScreen {
       margin-top: 3px;
     }
     .logOut {
@@ -108,12 +110,13 @@ const handleLogOut = () => {
       cursor: pointer;
       color: #ffffff;
       font-weight: 300;
-      img{
+      img {
         position: absolute;
         width: 30px;
         height: 30px;
         left: -40px;
         top: -7px;
+        border-radius: 50%;
       }
     }
 

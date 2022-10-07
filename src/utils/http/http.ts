@@ -10,6 +10,7 @@ import qs from 'qs'
 import { apiKeyType, apiKeyDataType } from '../../api/api'
 import cookie from '@/utils/cookie'
 import { ElMessage } from 'element-plus'
+import {userLogin} from '@/utils/index'
 type ResultDataType = apiKeyDataType[apiKeyType]
 /*
 NewAxiosInstance接口得根据自己情况来定
@@ -72,6 +73,9 @@ http.interceptors.response.use(
       return Promise.resolve(response)
     } else {
       ElMessage({message:response.data.msg,type:'error'})
+      if(response.data.code==='429'){
+        userLogin()
+      }
     }
   },
   (error) => {

@@ -30,18 +30,37 @@ export default defineConfig({
   base: './', // 打包路径
   // 启动服务配置
   server: {
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 4000, // 服务端口号
     open: true, // 服务启动时是否自动打开浏览器
     cors: true, // 允许跨域
+    hmr: true,
     https: false,
     proxy: {},
   },
   build: {
+    outDir: 'managerportalaccuratemarketing',
+    assetsDir: 'static',
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        //静态资源分类打包
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+        // manualChunks(id) { //静态资源分拆打包
+        //   if (id.includes('node_modules')) {`````````````````````
+        //     return id.toString().split('node_modules/')[1].split('/')[0].toString();
+        //   }
+        // }
       },
     },
   },

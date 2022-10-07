@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import cookie from '@/utils/cookie'
 import axios from '@/api/axios'
 import { asyncRoute } from '@/router'
+import i18n from '@/language/i18n'
 interface MenuList {
   path: string
   children: MenuList[]
@@ -19,7 +20,7 @@ interface MainState {
 const useMainStore = defineStore('main', {
   state: (): MainState => {
     return {
-      language: cookie.getCookies('language') || 'zh_CN',
+      language: cookie.getCookies('language') || 'zh',
       name: '',
       menuList: [],
     }
@@ -28,6 +29,7 @@ const useMainStore = defineStore('main', {
   actions: {
     setLanguages(lang: string) {
       this.language = lang
+      i18n.global.locale.value = lang
       cookie.setCookies('language', lang, 'Session')
     },
     async getSystemMenu() {
@@ -55,6 +57,14 @@ const useMainStore = defineStore('main', {
         this.name = res.data.userName
       }
     },
+    async logOut (){
+      const res = await axios({
+        url:'logOut',
+        method:'POST',
+        responseType: 'json',
+      })
+      console.log(res);
+    }
   },
 })
 
